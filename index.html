@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="動物配對師 — 向新線上遊戲地帶經典連連看小遊戲「動物配配對」致敬的網頁版重製。" />
+    <title>動物配對師</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='46' r='22' fill='%23F4A24A' stroke='%231a1a1a' stroke-width='3'/><circle cx='31' cy='42' r='3'/><circle cx='49' cy='42' r='3'/></svg>" />
+  </head>
+  <body>
+    <div id="app">
+      <section id="start-screen" class="screen" aria-label="標題畫面">
+        <div class="deco-row" id="deco-row" aria-hidden="true"></div>
+        <h1>動物配對師</h1>
+        <p class="subtitle">
+          點兩隻相同動物，用最多三筆直線連起來就可消除。<br />
+          通道可以行空格，亦可以行棋盤外面；最多轉兩個彎。
+        </p>
+        <ul class="rules-list">
+          <li>限時同生命：時間完會扣 1 點生命並補一段時間，生命歸零就結束。</li>
+          <li>相同但連唔到會扣生命；點到兩隻唔同動物只會取消選擇。</li>
+          <li>每一關消除之後，剩餘方塊會按關卡規則移動。</li>
+          <li>如果冇得行，會自動洗牌，保證唔會卡死。</li>
+        </ul>
+        <div class="btn-row">
+          <button type="button" class="btn" id="start-btn">開始遊戲</button>
+          <button type="button" class="btn secondary" id="start-mute">靜音</button>
+        </div>
+        <p class="best-score" id="best-score"></p>
+        <p class="tribute">向新線上遊戲地帶的經典小遊戲致敬</p>
+      </section>
+
+      <section id="playfield" class="hidden" aria-label="遊戲畫面">
+        <div class="hud" id="hud">
+          <div class="hud-level" id="hud-level">第1關</div>
+          <button type="button" class="hud-btn hint" id="hint-btn" title="剩餘 3 次（快捷鍵 H）">新手提示</button>
+          <div class="lives" title="生命">
+            <svg class="heart" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 21s-6.5-4.2-9.2-8.1C.6 9.8 1.2 6 4.4 4.7 6.6 3.8 8.7 4.7 12 8c3.3-3.3 5.4-4.2 7.6-3.3 3.2 1.3 3.8 5.1 1.6 8.2C18.5 16.8 12 21 12 21z"
+                fill="#3dcf4a"
+                stroke="#1a6a22"
+                stroke-width="1.2"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span id="lives-text">8點生命</span>
+          </div>
+          <button type="button" class="hud-btn f5" id="f5-btn" title="重新開始本關（F5 或 R）">F5</button>
+          <div class="timer-wrap" title="剩餘時間">
+            <div class="timer-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="剩餘時間">
+              <div class="timer-fill" id="timer-fill"></div>
+            </div>
+            <span class="timer-seconds" id="timer-sec">3:20</span>
+          </div>
+          <div class="score" id="score" aria-label="分數">0</div>
+          <div class="hud-tools">
+            <button type="button" class="hud-btn icon" id="pause-btn" title="暫停（Esc）">暫停</button>
+            <button type="button" class="hud-btn icon" id="mute-btn" title="靜音" aria-pressed="false">靜音</button>
+          </div>
+        </div>
+
+        <div class="board-shell" id="board-shell">
+          <div class="board" id="board" role="grid" aria-label="動物棋盤"></div>
+          <svg class="path-layer" id="path-layer" xmlns="http://www.w3.org/2000/svg">
+            <polyline id="path-line" points="" />
+          </svg>
+          <div class="particles" id="particles" aria-hidden="true"></div>
+        </div>
+
+        <div class="banner hidden" id="banner"></div>
+        <div class="banner hidden" id="confirm"></div>
+      </section>
+    </div>
+
+    <script src="js/engine.js"></script>
+    <script src="js/animals.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/game.js"></script>
+  </body>
+</html>
